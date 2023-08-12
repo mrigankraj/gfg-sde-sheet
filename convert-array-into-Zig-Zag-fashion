@@ -1,0 +1,92 @@
+1.) Convert array into Zig-Zag fashion
+
+Given an array arr of distinct elements of size N, the task is to rearrange the elements of the array in a zig-zag fashion so that the converted array should be in the below form: 
+
+arr[0] < arr[1]  > arr[2] < arr[3] > arr[4] < . . . . arr[n-2] < arr[n-1] > arr[n]. 
+
+NOTE: If your transformation is correct, the output will be 1 else the output will be 0. 
+
+Example 1:
+
+Input:
+N = 7
+Arr[] = {4, 3, 7, 8, 6, 2, 1}
+Output: 3 7 4 8 2 6 1
+Explanation: 3 < 7 > 4 < 8 > 2 < 6 > 1
+Example 2:
+
+Input:
+N = 4
+Arr[] = {1, 4, 3, 2}
+Output: 1 4 2 3
+Explanation: 1 < 4 > 2 < 3
+Your Task:
+You don't need to read input or print anything. Your task is to complete the function zigZag() which takes the array of integers arr and n as parameters and returns void. You need to modify the array itself.
+
+
+Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(1)
+
+Constraints:
+1 <= N <= 106
+0 <= Arri <= 109
+
+
+CODE:
+
+
+#include <iostream>
+
+void swap(int &a, int &b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+void zigZag(int arr[], int n) {
+    // Iterate through the array
+    for (int i = 0; i < n - 1; i++) {
+        if (i % 2 == 0) {
+            // If i is even, check if the current element is greater than the next element
+            if (arr[i] > arr[i + 1]) {
+                swap(arr[i], arr[i + 1]);
+            }
+        } else {
+            // If i is odd, check if the current element is less than the next element
+            if (arr[i] < arr[i + 1]) {
+                swap(arr[i], arr[i + 1]);
+            }
+        }
+    }
+}
+
+int main() {
+    int arr[] = {4, 3, 7, 8, 6, 2, 1};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    // Call the zigZag function to rearrange the array
+    zigZag(arr, n);
+
+    // Print the rearranged array
+    for (int i = 0; i < n; i++) {
+        std::cout << arr[i] << " ";
+    }
+
+    return 0;
+}
+
+Explanation:
+
+The swap function is used to swap two integer values.
+
+In the zigZag function, we iterate through the array using a for loop. Inside the loop, we check whether the current index i is even or odd.
+
+If i is even, we check if the current element arr[i] is greater than the next element arr[i + 1]. If it is, we swap the elements to ensure that the zig-zag condition is met.
+
+If i is odd, we check if the current element arr[i] is less than the next element arr[i + 1]. If it is, we swap the elements.
+
+After iterating through the array and swapping the necessary elements, the array will be rearranged in the zig-zag fashion as required.
+
+The main function demonstrates how to use the zigZag function and then prints the rearranged array.
+
+Keep in mind that the array is modified in-place using this approach.
