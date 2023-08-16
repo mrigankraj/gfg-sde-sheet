@@ -1,0 +1,118 @@
+Given an unsorted array A of size N that contains only positive integers, find a continuous sub-array that adds to a given number S and return the left and right index(1-based indexing) of that subarray.
+
+In case of multiple subarrays, return the subarray indexes which come first on moving from left to right.
+
+Note:- You have to return an ArrayList consisting of two elements left and right. In case no such subarray exists return an array consisting of element -1.
+
+Example 1:
+
+Input:
+N = 5, S = 12
+A[] = {1,2,3,7,5}
+Output: 2 4
+Explanation: The sum of elements 
+from 2nd position to 4th position 
+is 12.
+Example 2:
+
+Input:
+N = 10, S = 15
+A[] = {1,2,3,4,5,6,7,8,9,10}
+Output: 1 5
+Explanation: The sum of elements 
+from 1st position to 5th position
+is 15.
+Your Task:
+You don't need to read input or print anything. The task is to complete the function subarraySum() which takes arr, N, and S as input parameters and returns an ArrayList containing the starting and ending positions of the first such occurring subarray from the left where sum equals to S. The two indexes in the array should be according to 1-based indexing. If no such subarray is found, return an array consisting of only one element that is -1.
+
+Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(1)
+
+Constraints:
+1 <= N <= 105
+1 <= Ai <= 109
+0<= S <= 109
+
+
+
+
+
+
+CODE:
+
+Sure, here's the C++ code to solve the given problem along with explanations at each step:
+
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> subarraySum(int arr[], int n, int targetSum) {
+    int left = 0; // Initialize left pointer
+    int right = 0; // Initialize right pointer
+    int currentSum = 0; // Initialize current sum
+    
+    while (right < n) { // Loop until right pointer reaches the end
+        currentSum += arr[right]; // Add current element to the current sum
+        
+        while (currentSum > targetSum) {
+            currentSum -= arr[left]; // Subtract elements from the left side of the subarray
+            left++; // Move the left pointer
+        }
+        
+        if (currentSum == targetSum) {
+            return {left + 1, right + 1}; // Found the subarray with the target sum, return the indexes
+        }
+        
+        right++; // Move the right pointer
+    }
+    
+    return {-1}; // If no such subarray is found, return {-1}
+}
+
+int main() {
+    int n, targetSum;
+    cin >> n >> targetSum;
+    
+    int arr[n];
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+    
+    vector<int> result = subarraySum(arr, n, targetSum);
+    
+    for (int i : result) {
+        cout << i << " ";
+    }
+    
+    return 0;
+}
+
+
+Explanation of the code:
+
+Include necessary header files and namespace for using standard C++ functions and classes.
+
+Define the subarraySum function that takes an array arr, its size n, and the target sum targetSum as input.
+
+Initialize left and right pointers to keep track of the subarray being considered and currentSum to track the sum of elements in the subarray.
+
+Start a while loop that iterates until the right pointer reaches the end of the array.
+
+Inside the loop, add the current element at index right to the currentSum.
+
+Check if currentSum has exceeded the targetSum. If yes, then start subtracting elements from the left side of the subarray until currentSum becomes less than or equal to targetSum. Increment the left pointer accordingly.
+
+If currentSum becomes equal to targetSum, it means we have found the subarray with the desired sum. Return the left and right indexes of the subarray using left + 1 and right + 1 to convert from 0-based indexing to 1-based indexing.
+
+Move the right pointer to the next element in the array.
+
+After the loop finishes, if no subarray with the target sum is found, return {-1}.
+
+In the main function, read the input values n and targetSum.
+
+Read the array elements arr.
+
+Call the subarraySum function with the input array, size, and target sum.
+
+Print the result, which will contain the left and right indexes of the subarray with the target sum.
+
+This code finds the desired subarray with a time complexity of O(N) and uses constant auxiliary space.
