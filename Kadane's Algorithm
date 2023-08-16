@@ -1,0 +1,106 @@
+
+Given an array Arr[] of N integers. Find the contiguous sub-array(containing at least one number) which has the maximum sum and return its sum.
+
+
+Example 1:
+
+Input:
+N = 5
+Arr[] = {1,2,3,-2,5}
+Output:
+9
+Explanation:
+Max subarray sum is 9
+of elements (1, 2, 3, -2, 5) which 
+is a contiguous subarray.
+Example 2:
+
+Input:
+N = 4
+Arr[] = {-1,-2,-3,-4}
+Output:
+-1
+Explanation:
+Max subarray sum is -1 
+of element (-1)
+
+Your Task:
+You don't need to read input or print anything. The task is to complete the function maxSubarraySum() which takes Arr[] and N as input parameters and returns the sum of subarray with maximum sum.
+
+
+Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(1)
+
+
+Constraints:
+1 ≤ N ≤ 106
+-107 ≤ A[i] ≤ 107.   Write a c++ code for the same and explain it at each and every step.
+
+
+
+
+CODE:
+
+
+Certainly! This problem can be solved using the Kadane's algorithm, which efficiently finds the maximum subarray sum in linear time. Here's the C++ code to solve the problem along with an explanation of each step:
+
+#include <iostream>
+#include <climits>
+using namespace std;
+
+int maxSubarraySum(int arr[], int N) {
+    int max_sum = INT_MIN; // Initialize with a very small value
+    int current_sum = 0;
+
+    for (int i = 0; i < N; i++) {
+        current_sum += arr[i];
+
+        // If current sum becomes negative, reset it to 0
+        if (current_sum < 0) {
+            current_sum = 0;
+        }
+
+        // Update the maximum sum if current sum is greater
+        if (current_sum > max_sum) {
+            max_sum = current_sum;
+        }
+    }
+
+    return max_sum;
+}
+
+int main() {
+    int N1 = 5;
+    int arr1[] = {1, 2, 3, -2, 5};
+    cout << "Max subarray sum: " << maxSubarraySum(arr1, N1) << endl;
+
+    int N2 = 4;
+    int arr2[] = {-1, -2, -3, -4};
+    cout << "Max subarray sum: " << maxSubarraySum(arr2, N2) << endl;
+
+    return 0;
+}
+
+
+
+EXPLANATION:
+
+Now, let's break down the code step by step:
+
+The maxSubarraySum function takes an array arr and an integer N as inputs. It calculates and returns the maximum subarray sum.
+
+We initialize max_sum with the smallest possible integer value using INT_MIN. This value is used to compare with the sums in the array.
+
+We also initialize current_sum to keep track of the current sum while traversing the array.
+
+We iterate through the array using a loop. At each iteration, we add the current element to current_sum.
+
+If current_sum becomes negative (which means the sum until now is not contributing positively to the subarray), we reset current_sum to 0.
+
+We compare current_sum with max_sum and update max_sum if current_sum is greater.
+
+Finally, the function returns max_sum, which will be the maximum subarray sum.
+
+In the main function, we provide example inputs for testing the maxSubarraySum function and display the maximum subarray sum.
+
+The time complexity of this algorithm is O(N), where N is the size of the array, as we traverse the array exactly once. The auxiliary space complexity is O(1) since we are using only a constant amount of extra space for variables.
