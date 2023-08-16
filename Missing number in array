@@ -1,0 +1,86 @@
+Given an array of size N-1 such that it only contains distinct integers in the range of 1 to N. Find the missing element.
+
+Example 1:
+
+Input:
+N = 5
+A[] = {1,2,3,5}
+Output: 4
+Example 2:
+
+Input:
+N = 10
+A[] = {6,1,2,8,3,4,7,10,5}
+Output: 9
+
+Your Task :
+You don't need to read input or print anything. Complete the function MissingNumber() that takes array and N as input  parameters and returns the value of the missing number.
+
+
+Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(1)
+
+
+Constraints:
+1 ≤ N ≤ 106
+1 ≤ A[i] ≤ 106.   Write a c++ code for the same and explain it at each and every step by not using xor approach
+
+
+
+
+
+
+CODE:
+
+
+Certainly! Here's an alternative approach using the summation formula to find the missing element without using the XOR operation. We'll also go through each step for clarity.
+
+#include <iostream>
+using namespace std;
+
+int MissingNumber(int arr[], int N) {
+    // Calculate the sum of numbers from 1 to N using the formula n * (n + 1) / 2
+    int expected_sum = N * (N + 1) / 2;
+
+    // Calculate the sum of elements in the array
+    int actual_sum = 0;
+    for (int i = 0; i < N - 1; i++) {
+        actual_sum += arr[i];
+    }
+
+    // The missing element is the difference between the expected sum and actual sum
+    return expected_sum - actual_sum;
+}
+
+int main() {
+    int N1 = 5;
+    int A1[] = {1, 2, 3, 5};
+    cout << "Missing element: " << MissingNumber(A1, N1) << endl;
+
+    int N2 = 10;
+    int A2[] = {6, 1, 2, 8, 3, 4, 7, 10, 5};
+    cout << "Missing element: " << MissingNumber(A2, N2) << endl;
+
+    return 0;
+}
+
+
+EXPLANATION :
+
+Now, let's break down the code step by step:
+
+The MissingNumber function takes an array arr and an integer N as inputs. It calculates and returns the missing number.
+
+We use the summation formula for the sum of numbers from 1 to N: n * (n + 1) / 2 to calculate the expected sum of the numbers.
+
+The loop iterates through the array arr and calculates the actual sum of elements in the array.
+
+The missing element is the difference between the expected sum and the actual sum. This is because all the elements from 1 to N should be present in the array, except for the missing element.
+
+Finally, the function returns the calculated missing number.
+
+In the main function, we provide example inputs for testing the MissingNumber function and display the missing element.
+
+The time complexity of this approach is O(N) due to the single loop that iterates through the array, and the auxiliary space complexity is O(1) since we are using only a constant amount of extra space.
+
+
