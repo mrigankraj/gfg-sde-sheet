@@ -1,0 +1,112 @@
+
+Given an array of size N containing only 0s, 1s, and 2s; sort the array in ascending order.
+
+
+Example 1:
+
+Input: 
+N = 5
+arr[]= {0 2 1 2 0}
+Output:
+0 0 1 2 2
+Explanation:
+0s 1s and 2s are segregated 
+into ascending order.
+Example 2:
+
+Input: 
+N = 3
+arr[] = {0 1 0}
+Output:
+0 0 1
+Explanation:
+0s 1s and 2s are segregated 
+into ascending order.
+
+Your Task:
+You don't need to read input or print anything. Your task is to complete the function sort012() that takes an array arr and N as input parameters and sorts the array in-place.
+
+
+Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(1)
+
+
+Constraints:
+1 <= N <= 10^6
+0 <= A[i] <= 2.    Write a c++ code for the same and explain it at each and every step
+
+
+
+CODE:
+
+Certainly! This problem is known as the "Dutch National Flag" problem, and it can be solved using a variation of the quicksort algorithm. Here's the C++ code to solve the problem along with an explanation of each step:
+
+#include <iostream>
+using namespace std;
+
+void sort012(int arr[], int N) {
+    int low = 0;        // Index to keep track of 0s
+    int high = N - 1;   // Index to keep track of 2s
+    int mid = 0;        // Index to traverse the array
+
+    while (mid <= high) {
+        if (arr[mid] == 0) {
+            swap(arr[low], arr[mid]);
+            low++;
+            mid++;
+        } else if (arr[mid] == 1) {
+            mid++;
+        } else { // arr[mid] == 2
+            swap(arr[mid], arr[high]);
+            high--;
+        }
+    }
+}
+
+int main() {
+    int N1 = 5;
+    int arr1[] = {0, 2, 1, 2, 0};
+    sort012(arr1, N1);
+    cout << "Sorted array: ";
+    for (int i = 0; i < N1; i++) {
+        cout << arr1[i] << " ";
+    }
+    cout << endl;
+
+    int N2 = 3;
+    int arr2[] = {0, 1, 0};
+    sort012(arr2, N2);
+    cout << "Sorted array: ";
+    for (int i = 0; i < N2; i++) {
+        cout << arr2[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+
+
+
+EXPLANATION:
+
+Now, let's break down the code step by step:
+
+The sort012 function takes an array arr and an integer N as inputs. It sorts the array in-place in ascending order.
+
+We use three pointers: low, mid, and high to keep track of the positions of 0s, 1s, and 2s respectively.
+
+We start iterating from mid (initially 0) and compare the element at index mid with the values 0, 1, and 2.
+
+If arr[mid] is 0, we swap it with the element at index low, increment both low and mid.
+
+If arr[mid] is 1, we increment only mid.
+
+If arr[mid] is 2, we swap it with the element at index high, decrement high.
+
+We repeat these steps until mid crosses high.
+
+In the main function, we provide example inputs for testing the sort012 function and display the sorted arrays.
+
+The time complexity of this algorithm is O(N), where N is the size of the array, as we traverse the array exactly once. The auxiliary space complexity is O(1) since we are using a constant amount of extra space for pointers and swaps.
+
+
